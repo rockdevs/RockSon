@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws IOException, InvalidJsonFormatException {
         RockJsonParser rockJsonParser = new RockSon();
         System.err.println("----------------------------------------");
-        String json = "{\"name\":\"John\", \"age\":30, \"car\":null , \"adress\":{ \"num\":17,\"home\":\"Ecimiz\" }}";
+        String json = "{\"name\":\"John\", \"age\":30, \n\t\"car\":null , \"adress\":{ \"num\":17,\"home\":\"Ecimiz\" }}";
         System.out.println(rockJsonParser.parse(json));
     }
 }

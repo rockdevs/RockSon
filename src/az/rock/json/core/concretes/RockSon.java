@@ -13,14 +13,6 @@ public class RockSon implements RockJsonParser {
 
     private int initialCapacity = JsonSize.SMALL.getInitialCapacity();
 
-    private StringBuilder stringBuilder;
-
-    private StringBuilder incBuilder;
-
-    private StringBuilder decBuilder;
-
-    private final char tab = ' ';
-
     private Integer lastTabCount = 0;
 
     public RockSon() {
@@ -64,40 +56,60 @@ public class RockSon implements RockJsonParser {
         char first = (char)jsonTrimmer.getBytes(StandardCharsets.UTF_8)[0];
         char last= (char) jsonTrimmer.getBytes(StandardCharsets.UTF_8)[jsonTrimmer.length()-1];
         if((first != '{') == (first != '[') || (last != '}') == (last != ']')) throw new InvalidJsonFormatException();
-        return jsonTrimmer;
+        return jsonTrimmer.replace(" ","").replace("\n","").replace("\t","");
     }
 
 
 
     private String proceed(String json) throws IOException {
-        stringBuilder = new StringBuilder();
-        StringReader reader = new StringReader(json);
-        int lengthOfJson = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        final StringReader reader = new StringReader(json);
+        int index = 0;
 
-        while (lengthOfJson < json.length()){
+
+        while (index < json.length()){
             char character = (char) reader.read();
-            stringBuilder.append(character);
+            if((character != '}') == (character != ']'))
+                stringBuilder.append(character);
 
-
-
-
-            lengthOfJson++;
+            if(character=='{' || character=='[') stringBuilder.append(increment());
+            if(character==',') stringBuilder.append(incrementNormal());
+            if(character=='}' || character==']') {
+                stringBuilder.append(decrement());
+                stringBuilder.append(character);
+            }
+            index++;
         }
-        //return stringBuilder.toString();
-        return "SSS";
+        return stringBuilder.toString();
     }
 
 
     private String increment(){
-        incBuilder = new StringBuilder();
-
+        StringBuilder incBuilder = new StringBuilder();
+        int count  = this.lastTabCount;
+        incBuilder.append('\n');
+        for (int i = 0;i <= lastTabCount;i++)
+            incBuilder.append('\t');
+        this.lastTabCount++;
         return incBuilder.toString();
     }
 
-    private String decrement(){
-        decBuilder = new StringBuilder();
+    private String incrementNormal(){
+        StringBuilder stringBuilder = new StringBuilder();
+        int count  = this.lastTabCount;
+        stringBuilder.append('\n');
+        for (int i = 0;i < lastTabCount;i++)
+            stringBuilder.append('\t');
+        return stringBuilder.toString();
+    }
 
-        return decBuilder.toString();
+    private String decrement(){
+        StringBuilder stringBuilder = new StringBuilder();
+        int count  = this.lastTabCount--;
+        stringBuilder.append('\n');
+        for (int i = 0;i < count-1;i++)
+            stringBuilder.append('\t');
+        return stringBuilder.toString();
     }
 
 }
