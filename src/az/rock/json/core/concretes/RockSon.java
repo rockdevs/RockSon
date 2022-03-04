@@ -85,30 +85,22 @@ public class RockSon implements RockJsonParser {
 
 
     private String increment(){
-        StringBuilder incBuilder = new StringBuilder();
-        int count  = this.lastTabCount;
-        incBuilder.append('\n');
-        for (int i = 0;i <= lastTabCount;i++)
-            incBuilder.append('\t');
+        String incBuilder = '\n' +
+                "\t".repeat(Math.max(0, lastTabCount + 1));
         this.lastTabCount++;
-        return incBuilder.toString();
+        return incBuilder;
     }
 
     private String incrementNormal(){
-        StringBuilder stringBuilder = new StringBuilder();
-        int count  = this.lastTabCount;
-        stringBuilder.append('\n');
-        for (int i = 0;i < lastTabCount;i++)
-            stringBuilder.append('\t');
-        return stringBuilder.toString();
+        return '\n' +
+                "\t".repeat(Math.max(0, lastTabCount));
     }
 
     private String decrement(){
         StringBuilder stringBuilder = new StringBuilder();
         int count  = this.lastTabCount--;
         stringBuilder.append('\n');
-        for (int i = 0;i < count-1;i++)
-            stringBuilder.append('\t');
+        stringBuilder.append("\t".repeat(Math.max(0, count - 1)));
         return stringBuilder.toString();
     }
 
