@@ -1,4 +1,4 @@
-package az.rock.json.context.concretes;
+package az.rock.json.core.concretes;
 
 public enum JsonSize {
     VERY_SMALL(100)
