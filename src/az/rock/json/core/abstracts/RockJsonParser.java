@@ -5,5 +5,6 @@ import az.rock.json.exception.InvalidJsonFormatException;
 import java.io.IOException;
 
 public interface RockJsonParser {
-    String parse(String json) throws IOException, InvalidJsonFormatException;
+    default String parse(String json) throws IOException, InvalidJsonFormatException{ return json;};
+    default String parse() { return "json";};
 }
