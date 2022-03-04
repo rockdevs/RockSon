@@ -1,12 +1,12 @@
 package az.rock.json.core.concretes;
 
-import az.rock.json.core.abstracts.RockJsonParser;
+import az.rock.json.core.abstracts.RockPretty;
 
-public class ObjectiveParser implements RockJsonParser {
+public class ObjectivePretty implements RockPretty {
 
     private final String json;
 
-    public ObjectiveParser(String json) {
+    public ObjectivePretty(String json) {
         this.json = json;
     }
 

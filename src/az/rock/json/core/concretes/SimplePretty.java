@@ -1,13 +1,13 @@
 package az.rock.json.core.concretes;
 
-import az.rock.json.core.abstracts.RockJsonParser;
+import az.rock.json.core.abstracts.RockPretty;
 import az.rock.json.exception.InvalidJsonFormatException;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 
-public class SimpleParser implements RockJsonParser {
+public class SimplePretty implements RockPretty {
 
     private Integer lastTabCount = 0;
 
