@@ -7,43 +7,9 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 
-public class RockSon implements RockJsonParser {
-
-    private String context;
-
-    private int initialCapacity = JsonSize.SMALL.getInitialCapacity();
+public class SimpleParser implements RockJsonParser {
 
     private Integer lastTabCount = 0;
-
-    public RockSon() {
-
-    }
-
-    public RockSon(JsonSize initialCapacity){
-        this.initialCapacity = initialCapacity.getInitialCapacity();
-    }
-
-    public RockSon(int initialCapacity){
-        this.initialCapacity = initialCapacity;
-    }
-
-    public RockSon(String json) {
-        this.context = json.trim();
-    }
-
-    public RockSon(String json,JsonSize initialCapacity) {
-        this.initialCapacity = initialCapacity.getInitialCapacity();
-        this.context = json.trim();
-    }
-
-    public RockSon(String json,int initialCapacity) {
-        this.initialCapacity = initialCapacity;
-        this.context = json.trim();
-    }
-
-    public void setContext(String context) {
-        this.context = context.trim();
-    }
 
     @Override
     public String parse(String json) throws IOException, InvalidJsonFormatException {
